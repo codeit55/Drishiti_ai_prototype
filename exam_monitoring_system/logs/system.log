@@ -1,0 +1,49 @@
+2026-07-26 00:10:31 [INFO] (Exam_Monitoring_Module_1.py:101) - Logging infrastructure successfully initialized.
+2026-07-26 00:10:31 [INFO] (Exam_Monitoring_Module_1.py:244) - Loaded config parameters: ExamMonitorConfig(video_path='C:\\Users\\rishi\\Downloads\\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4', yolo_model_name='yolo11n.pt', confidence_threshold=0.4, min_detection_confidence=0.5, min_tracking_confidence=0.5, head_turn_threshold=15.0, gaze_deviation_threshold=0.15, project_dir='exam_monitoring_system', output_dir='exam_monitoring_system\\output', log_dir='exam_monitoring_system\\logs', verbose=True)
+2026-07-26 00:10:31 [INFO] (Exam_Monitoring_Module_1.py:136) - Loading YOLO11 model: yolo11n.pt
+2026-07-26 00:10:32 [INFO] (Exam_Monitoring_Module_1.py:141) - YOLO11 loaded successfully. Running dummy verification inference...
+2026-07-26 00:10:34 [INFO] (Exam_Monitoring_Module_1.py:147) - Inference check successful. Obtained 1 results object(s).
+2026-07-26 00:10:34 [ERROR] (Exam_Monitoring_Module_1.py:185) - Failed to initialize MediaPipe models: module 'mediapipe' has no attribute 'solutions'
+Traceback (most recent call last):
+  File "E:\yolo\Exam_Monitoring_Module_1.py", line 160, in verify_mediapipe
+    mp_pose = mp.solutions.pose
+              ^^^^^^^^^^^^
+AttributeError: module 'mediapipe' has no attribute 'solutions'
+2026-07-26 00:11:00 [INFO] (Exam_Monitoring_Module_1.py:101) - Logging infrastructure successfully initialized.
+2026-07-26 00:11:00 [INFO] (Exam_Monitoring_Module_1.py:244) - Loaded config parameters: ExamMonitorConfig(video_path='C:\\Users\\rishi\\Downloads\\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4', yolo_model_name='yolo11n.pt', confidence_threshold=0.4, min_detection_confidence=0.5, min_tracking_confidence=0.5, head_turn_threshold=15.0, gaze_deviation_threshold=0.15, project_dir='exam_monitoring_system', output_dir='exam_monitoring_system\\output', log_dir='exam_monitoring_system\\logs', verbose=True)
+2026-07-26 00:11:00 [INFO] (Exam_Monitoring_Module_1.py:136) - Loading YOLO11 model: yolo11n.pt
+2026-07-26 00:11:00 [INFO] (Exam_Monitoring_Module_1.py:141) - YOLO11 loaded successfully. Running dummy verification inference...
+2026-07-26 00:11:02 [INFO] (Exam_Monitoring_Module_1.py:147) - Inference check successful. Obtained 1 results object(s).
+2026-07-26 00:11:02 [ERROR] (Exam_Monitoring_Module_1.py:185) - Failed to initialize MediaPipe models: No module named 'mediapipe.python'
+Traceback (most recent call last):
+  File "E:\yolo\Exam_Monitoring_Module_1.py", line 160, in verify_mediapipe
+    import mediapipe.python.solutions.pose as mp_pose
+ModuleNotFoundError: No module named 'mediapipe.python'
+2026-07-26 00:11:22 [INFO] (Exam_Monitoring_Module_1.py:100) - Logging infrastructure successfully initialized.
+2026-07-26 00:11:22 [INFO] (Exam_Monitoring_Module_1.py:243) - Loaded config parameters: ExamMonitorConfig(video_path='C:\\Users\\rishi\\Downloads\\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4', yolo_model_name='yolo11n.pt', confidence_threshold=0.4, min_detection_confidence=0.5, min_tracking_confidence=0.5, head_turn_threshold=15.0, gaze_deviation_threshold=0.15, project_dir='exam_monitoring_system', output_dir='exam_monitoring_system\\output', log_dir='exam_monitoring_system\\logs', verbose=True)
+2026-07-26 00:11:22 [INFO] (Exam_Monitoring_Module_1.py:135) - Loading YOLO11 model: yolo11n.pt
+2026-07-26 00:11:22 [INFO] (Exam_Monitoring_Module_1.py:140) - YOLO11 loaded successfully. Running dummy verification inference...
+2026-07-26 00:11:23 [INFO] (Exam_Monitoring_Module_1.py:146) - Inference check successful. Obtained 1 results object(s).
+2026-07-26 00:11:23 [ERROR] (Exam_Monitoring_Module_1.py:184) - Failed to initialize MediaPipe models: No module named 'mediapipe.solutions'
+Traceback (most recent call last):
+  File "E:\yolo\Exam_Monitoring_Module_1.py", line 159, in verify_mediapipe
+    import mediapipe.solutions.pose as mp_pose
+ModuleNotFoundError: No module named 'mediapipe.solutions'
+2026-07-26 00:12:12 [INFO] (Exam_Monitoring_Module_1.py:100) - Logging infrastructure successfully initialized.
+2026-07-26 00:12:12 [INFO] (Exam_Monitoring_Module_1.py:256) - Loaded config parameters: ExamMonitorConfig(video_path='C:\\Users\\rishi\\Downloads\\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4', yolo_model_name='yolo11n.pt', confidence_threshold=0.4, min_detection_confidence=0.5, min_tracking_confidence=0.5, head_turn_threshold=15.0, gaze_deviation_threshold=0.15, project_dir='exam_monitoring_system', output_dir='exam_monitoring_system\\output', log_dir='exam_monitoring_system\\logs', verbose=True)
+2026-07-26 00:12:12 [INFO] (Exam_Monitoring_Module_1.py:135) - Loading YOLO11 model: yolo11n.pt
+2026-07-26 00:12:12 [INFO] (Exam_Monitoring_Module_1.py:140) - YOLO11 loaded successfully. Running dummy verification inference...
+2026-07-26 00:12:14 [INFO] (Exam_Monitoring_Module_1.py:146) - Inference check successful. Obtained 1 results object(s).
+2026-07-26 00:12:14 [INFO] (Exam_Monitoring_Module_1.py:185) - Legacy MediaPipe solutions not found. Verifying using new Tasks API...
+2026-07-26 00:12:14 [INFO] (Exam_Monitoring_Module_1.py:190) - MediaPipe Tasks API verified successfully. PoseLandmarker & FaceLandmarker are available.
+2026-07-26 00:12:14 [INFO] (Exam_Monitoring_Module_1.py:208) - Input video file found at path: C:\Users\rishi\Downloads\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4
+2026-07-26 00:12:14 [INFO] (Exam_Monitoring_Module_1.py:228) - Video stream verified. Frame dimensions: (854, 480, 3)
+2026-07-26 00:14:15 [INFO] (Exam_Monitoring_Module_1.py:100) - Logging infrastructure successfully initialized.
+2026-07-26 00:14:15 [INFO] (Exam_Monitoring_Module_1.py:257) - Loaded config parameters: ExamMonitorConfig(video_path='C:\\Users\\rishi\\Downloads\\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4', yolo_model_name='yolo11n.pt', confidence_threshold=0.4, min_detection_confidence=0.5, min_tracking_confidence=0.5, head_turn_threshold=15.0, gaze_deviation_threshold=0.15, project_dir='exam_monitoring_system', output_dir='exam_monitoring_system\\output', log_dir='exam_monitoring_system\\logs', verbose=True)
+2026-07-26 00:14:15 [INFO] (Exam_Monitoring_Module_1.py:135) - Loading YOLO11 model: yolo11n.pt
+2026-07-26 00:14:15 [INFO] (Exam_Monitoring_Module_1.py:140) - YOLO11 loaded successfully. Running dummy verification inference...
+2026-07-26 00:14:17 [INFO] (Exam_Monitoring_Module_1.py:146) - Inference check successful. Obtained 1 results object(s).
+2026-07-26 00:14:17 [INFO] (Exam_Monitoring_Module_1.py:186) - Legacy MediaPipe solutions not found. Verifying using new Tasks API...
+2026-07-26 00:14:17 [INFO] (Exam_Monitoring_Module_1.py:191) - MediaPipe Tasks API verified successfully. PoseLandmarker & FaceLandmarker are available.
+2026-07-26 00:14:17 [INFO] (Exam_Monitoring_Module_1.py:209) - Input video file found at path: C:\Users\rishi\Downloads\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4
+2026-07-26 00:14:17 [INFO] (Exam_Monitoring_Module_1.py:229) - Video stream verified. Frame dimensions: (854, 480, 3)
