@@ -1,0 +1,5 @@
+2026-07-26 00:41:45 [INFO] (Exam_Monitoring_Module_7.py:85) - ExamMonitoringLogger initialized.
+2026-07-26 00:41:45 [INFO] (Exam_Monitoring_Module_7.py:181) - Loaded 7350 behaviour events.
+2026-07-26 00:41:45 [INFO] (Exam_Monitoring_Module_7.py:92) - CSV log file opened at: exam_monitoring_system\output\exam_monitoring_log.csv
+2026-07-26 00:41:45 [INFO] (Exam_Monitoring_Module_7.py:99) - CSV log file closed and flushed.
+2026-07-26 00:41:45 [INFO] (Exam_Monitoring_Module_7.py:229) - Module 7 complete. Logged 7350 events to: exam_monitoring_system\output\exam_monitoring_log.csv
