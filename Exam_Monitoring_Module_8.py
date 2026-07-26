@@ -35,7 +35,7 @@ import matplotlib.cm as cm
 
 # ─────────────────────────── PATHS ───────────────────────────
 PROJECT_DIR        = "exam_monitoring_system"
-VIDEO_PATH         = r"C:\Users\rishi\Downloads\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
+VIDEO_PATH         = r"/Users/harshsharma/Downloads/WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
 TRACKED_VIDEO_PATH = os.path.join(PROJECT_DIR, "output", "tracked_pose_output.mp4")
 BEHAVIOURS_JSON    = os.path.join(PROJECT_DIR, "output", "detected_behaviours.json")
 RISK_JSON          = os.path.join(PROJECT_DIR, "output", "risk_scores.json")
@@ -63,6 +63,18 @@ st.markdown("""
     .alert-safe     { background: #052e16; border-left: 4px solid #22c55e; padding: 10px; border-radius: 6px; margin: 4px 0; }
     .section-header { font-size: 1.1rem; font-weight: 600; color: #93c5fd; border-bottom: 1px solid #2d3748; padding-bottom: 6px; margin-bottom: 12px; }
     .student-card   { background: #1c2333; border-radius: 10px; padding: 14px; border: 1px solid #2d3748; margin-bottom: 8px; }
+    .student-alert-group { background: #151c2b; border: 1px solid #2d3748; border-radius: 12px; padding: 16px; margin: 0 0 16px; box-shadow: 0 5px 16px rgba(0, 0, 0, .16); }
+    .student-alert-title { color: #f8fafc; font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+    .event-card { background: #1c2333; border: 1px solid #334155; border-left: 4px solid var(--severity-color); border-radius: 10px; box-shadow: 0 3px 10px rgba(0, 0, 0, .16); padding: 13px 14px; margin-bottom: 10px; min-height: 122px; transition: transform .16s ease, box-shadow .16s ease; }
+    .event-card:hover { transform: translateY(-2px); box-shadow: 0 7px 18px rgba(0, 0, 0, .24); }
+    .event-name { color: #f8fafc; font-size: .95rem; font-weight: 700; margin-bottom: 10px; }
+    .event-meta { display: flex; flex-wrap: wrap; gap: 7px; }
+    .event-badge { display: inline-block; border-radius: 999px; font-size: .72rem; font-weight: 700; line-height: 1; padding: 6px 8px; white-space: nowrap; }
+    .severity-badge { background: var(--severity-color); color: #ffffff; }
+    .confidence-badge { background: #24334f; color: #bfdbfe; border: 1px solid #334155; }
+    .time-badge { background: #202b3d; color: #cbd5e1; border: 1px solid #334155; }
+    [data-testid="stExpander"] { background: #151c2b; border: 1px solid #2d3748; border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
+    [data-testid="stExpander"] summary { padding: 2px 4px; font-weight: 700; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -202,9 +214,36 @@ with col_video:
             nearby = df_filtered[(df_filtered["timestamp"] >= frame_ts - 0.5) &
                                  (df_filtered["timestamp"] <= frame_ts + 0.5)]
             if not nearby.empty:
-                st.caption("**Events at this timestamp:**")
-                for _, row in nearby.iterrows():
-                    st.markdown(f"- 🔴 **Student {row['student_id']}**: `{row['behaviour_name']}` (Conf: {row['confidence']:.2f})")
+                st.markdown("""
+                <style>
+                    .timestamp-heading { color: #93c5fd; font-size: .9rem; font-weight: 700; margin: .9rem 0 .65rem; }
+                    .timestamp-student-title { color: #f8fafc; font-size: .95rem; font-weight: 700; margin-bottom: .75rem; }
+                    .timestamp-event { background: #1c2333; border: 1px solid #334155; border-left: 4px solid #3b82f6; border-radius: 9px; box-shadow: 0 3px 10px rgba(0, 0, 0, .14); padding: .65rem .75rem; margin: 0 0 .55rem; transition: transform .15s ease, box-shadow .15s ease; }
+                    .timestamp-event:hover { transform: translateY(-2px); box-shadow: 0 7px 16px rgba(0, 0, 0, .22); }
+                    .timestamp-event-name { color: #f8fafc; font-size: .86rem; font-weight: 700; margin-bottom: .45rem; }
+                    .timestamp-confidence { display: inline-block; background: #24334f; border: 1px solid #334155; border-radius: 999px; color: #bfdbfe; font-size: .72rem; font-weight: 700; padding: .28rem .5rem; }
+                </style>
+                <div class="timestamp-heading">⚡ Events at this timestamp</div>
+                """, unsafe_allow_html=True)
+
+                student_ids = nearby["student_id"].unique()
+                for start in range(0, len(student_ids), 2):
+                    student_cols = st.columns(2, gap="small")
+                    for col, student_id in zip(student_cols, student_ids[start:start + 2]):
+                        student_events = nearby[nearby["student_id"] == student_id]
+                        display_events = student_events[
+                            student_events["confidence"] == student_events.groupby("behaviour_name")["confidence"].transform("max")
+                        ].drop_duplicates(subset=["behaviour_name"], keep="first")
+                        with col:
+                            with st.container(border=True):
+                                st.markdown(f'<div class="timestamp-student-title">👤 Student {student_id}</div>', unsafe_allow_html=True)
+                                for _, row in display_events.iterrows():
+                                    st.markdown(f"""
+                                    <div class="timestamp-event">
+                                        <div class="timestamp-event-name">🔴 {row['behaviour_name']}</div>
+                                        <span class="timestamp-confidence">Confidence {row['confidence']:.2f}</span>
+                                    </div>
+                                    """, unsafe_allow_html=True)
     else:
         st.info("Enable 'Show Video Replay' to display frames.")
 
@@ -240,17 +279,27 @@ st.markdown('<div class="section-header">🚨 Active Alerts</div>', unsafe_allow
 if not df_filtered.empty:
     high_risk = df_filtered[df_filtered["confidence"] >= 0.8].sort_values("timestamp", ascending=False).head(20)
     if not high_risk.empty:
-        for _, row in high_risk.iterrows():
-            rid = row["student_id"]
-            label = risk_db.get(str(rid), {}).get("risk_label", "Unknown")
-            css_class = f"alert-{label.lower()}" if label.lower() in ["critical","high","medium","safe"] else "alert-safe"
-            st.markdown(f"""
-            <div class="{css_class}">
-                🔔 <strong>Student {rid}</strong> — {row['behaviour_name']}
-                &nbsp;|&nbsp; T={row['timestamp']:.2f}s
-                &nbsp;|&nbsp; Conf: {row['confidence']:.2f}
-                &nbsp;|&nbsp; <span style="color:{label_color(label)}">{label}</span>
-            </div>""", unsafe_allow_html=True)
+        for rid in high_risk["student_id"].unique():
+            student_alerts = high_risk[high_risk["student_id"] == rid]
+            with st.container():
+                st.markdown(f'<div class="student-alert-group"><div class="student-alert-title">👤 Student {rid} <span style="color:#94a3b8;font-size:.78rem;font-weight:600;">· {len(student_alerts)} alert(s)</span></div>', unsafe_allow_html=True)
+                for start in range(0, len(student_alerts), 3):
+                    alert_cols = st.columns(3, gap="small")
+                    for col, (_, row) in zip(alert_cols, student_alerts.iloc[start:start + 3].iterrows()):
+                        label = risk_db.get(str(rid), {}).get("risk_label", "Unknown")
+                        color = label_color(label)
+                        with col:
+                            st.markdown(f"""
+                            <div class="event-card" style="--severity-color:{color};">
+                                <div class="event-name">🔴 {row['behaviour_name']}</div>
+                                <div class="event-meta">
+                                    <span class="event-badge severity-badge">{label}</span>
+                                    <span class="event-badge confidence-badge">Confidence {row['confidence']:.2f}</span>
+                                    <span class="event-badge time-badge">⏱ {row['timestamp']:.2f}s</span>
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.success("No high-confidence alerts detected at current threshold.")
 else:

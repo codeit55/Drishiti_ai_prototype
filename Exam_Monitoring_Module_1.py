@@ -103,8 +103,7 @@ def setup_logging(project_dir):
 @dataclass
 class ExamMonitorConfig:
     # Input source
-    video_path: str = r"C:\Users\rishi\Downloads\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
-    
+    video_path: str = r"/Users/harshsharma/Downloads/WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"    
     # Model parameters
     yolo_model_name: str = "yolo11n.pt"  # Pre-trained YOLO11 Nano model
     confidence_threshold: float = 0.40

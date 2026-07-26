@@ -38,7 +38,7 @@ logger = logging.getLogger("Module2_Tracking")
 @dataclass
 class TrackingConfig:
     # Source configuration
-    video_path: str = r"C:\Users\rishi\Downloads\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
+    video_path: str = r"/Users/harshsharma/Downloads/WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
     
     # Model parameters
     model_name: str = "yolo11n.pt"

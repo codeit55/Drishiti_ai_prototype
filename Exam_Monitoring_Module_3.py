@@ -50,7 +50,7 @@ POSE_CONNECTIONS = [
 
 @dataclass
 class PoseConfig:
-    video_path: str = r"C:\Users\rishi\Downloads\WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
+    video_path: str = r"/Users/harshsharma/Downloads/WhatsApp Video 2026-07-25 at 10.59.18 PM.mp4"
     yolo_model_name: str = "yolo11n.pt"
     pose_model_url: str = "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task"
     pose_model_name: str = "pose_landmarker_full.task"
